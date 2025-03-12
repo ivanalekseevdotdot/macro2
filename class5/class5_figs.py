@@ -71,12 +71,18 @@ ax.plot([c1_star, c1_star], [c2_star, 0], linestyle='--', color='orange')
 ax.plot([3, 3], [0, budget_line(3, r1)], linestyle='--', color='dimgray', label=r'Borrow ($Y_1^B$)')
 ax.plot([5, 5], [0, budget_line(5, r1)], linestyle='--', color='royalblue', label=r'Save ($Y_1^S$)')
 
-# 2b. generate & save fig
+# 2b. labels and layout
+plt.xlim(0, (1+r1)*H + 0.5)
+plt.ylim(0, (1 +r1)*H + 0.5)
+
+# 2c. generate & save fig
 plt.legend()
 plt.tight_layout()
 filepath = os.path.join(desktop, "fig2_alt_y1.pdf")
 plt.savefig(filepath)
 plt.close()
+
+
 
 # 3. fig 3 change in interest rate
 # 3a. make second line
@@ -130,6 +136,9 @@ plt.tight_layout()
 filepath = os.path.join(desktop, "fig4_credit_cons.pdf")
 plt.savefig(filepath)
 plt.close()
+
+
+
 
 
 
