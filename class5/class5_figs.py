@@ -82,8 +82,6 @@ filepath = os.path.join(desktop, "fig2_alt_y1.pdf")
 plt.savefig(filepath)
 plt.close()
 
-
-
 # 3. fig 3 change in interest rate
 # 3a. make second line
 r2 = 0.3
