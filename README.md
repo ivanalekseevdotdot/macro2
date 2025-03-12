@@ -1,1 +1,1 @@
-# macro2
+# macro2 class material
