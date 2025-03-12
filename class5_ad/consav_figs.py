@@ -1,8 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
-import os
-desktop = os.path.join(os.path.expanduser("~"), "Desktop")
 
 # a. parameters
 phi = 0.03       
@@ -55,8 +53,7 @@ ax.yaxis.set_major_locator(ticker.MultipleLocator(base=2))
 # 1c. generate & save fig
 plt.legend()
 plt.tight_layout()
-filepath = os.path.join(desktop, "fig1_opt.pdf")
-plt.savefig(filepath)
+plt.savefig("class5_ad/a_opt.pdf")
 plt.close()
 
 # 2. fig 2 alt y1
@@ -78,8 +75,7 @@ plt.ylim(0, (1 +r1)*H + 0.5)
 # 2c. generate & save fig
 plt.legend()
 plt.tight_layout()
-filepath = os.path.join(desktop, "fig2_alt_y1.pdf")
-plt.savefig(filepath)
+plt.savefig("class5_ad/b_alt_y1.pdf")
 plt.close()
 
 # 3. fig 3 change in interest rate
@@ -100,8 +96,7 @@ plt.ylim(0, (1 + r2)*H + 0.5)
 # 3d. generate & save fig
 plt.legend()
 plt.tight_layout()
-filepath = os.path.join(desktop, "fig3_alt_r.pdf")
-plt.savefig(filepath)
+plt.savefig("class5_ad/c_alt_r.pdf")
 plt.close()
 
 # 4. fig 4 budget constrained
@@ -131,8 +126,7 @@ plt.ylim(0, (1 +r1)*H + 0.5)
 # 4d. generate & save fig
 plt.legend()
 plt.tight_layout()
-filepath = os.path.join(desktop, "fig4_credit_cons.pdf")
-plt.savefig(filepath)
+plt.savefig("class5_ad/d_credit_cons.pdf")
 plt.close()
 
 

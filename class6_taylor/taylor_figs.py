@@ -28,8 +28,8 @@ i_taylor_1 = taylor(h=0.5, b=0.5, pi_star = 2, r_bar = 2)
 
 # e. plot 1
 fig, ax = plt.subplots(figsize=(7,4.5))
-ax.plot(date, i_actual, color='royalblue', label=r'Actual $i$')
-ax.plot(date, i_taylor_1, color='darkred', label=r'Taylor rule $i$')
+actual_i = ax.plot(date, i_actual, color='royalblue', label=r'Actual $i$')
+taylor_baseline_h=ax.plot(date, i_taylor_1, color='darkred', label=r'Taylor rule $i$')
 ax.set_xlabel('Date', fontsize=12)
 ax.legend()
 ax.grid(True, linestyle=':', alpha=0.7)
@@ -40,7 +40,7 @@ grid = np.linspace(0, 1, 100)
 for h in grid:
     i_taylor_h = taylor(h=h, b=0.5, pi_star = 2, r_bar = 2)
     h_fans = ax.plot(date, i_taylor_h, color='lightcoral', alpha=0.5)
-ax.plot(date, i_taylor_1, color='darkred', label=r'Taylor rule $i$')
+taylor_baseline_h = ax.plot(date, i_taylor_1, color='darkred', label=r'Taylor rule $i$')
 
 # g. sensetivity to b new plot
 for line in h_fans:
@@ -48,7 +48,18 @@ for line in h_fans:
 
 for b in grid:
     i_taylor_b = taylor(h=0.5, b=b, pi_star = 2, r_bar = 2)
-    ax.plot(date, i_taylor_b, color='salmon', alpha=0.5)
+    b_fans = ax.plot(date, i_taylor_b, color='salmon', alpha=0.5)
 ax.plot(date, i_taylor_1, color='darkred', label=r'Taylor rule $i$')
+
+# h. new rbar
+taylor_baseline_h.remove()
+
+for line in h_fans:
+    line.remove()
+    
+for line in b_fans:
+    line.remove()
+    
+
 
 plt.show()
