@@ -1,11 +1,12 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib.ticker as ticker
 
 # 1. calibration
 # 1a. parameters
-alpha = 3.0      
-gamma = 1.0      
-y_bar = 10.0      
+alpha = 2.0      
+gamma = 2.0      
+y_bar = 15.0      
 pi_star = 10.0    
 T = 20
 T_fig = 2           
@@ -13,7 +14,7 @@ T_fig = 2
 # 1b. shocks
 z = np.zeros(T+1)
 s = np.zeros(T+1)
-z[1] = 3.0  # change shock here
+z[1] = 10.0  # change shock here
 
 # 1c. store path
 pi_vals = np.zeros(T+1)  
@@ -44,23 +45,21 @@ plt.figure(figsize=(10,5))
 # 2b. plot
 plt.subplot(1,2,1)
 plt.plot(time, pi_vals, marker='o')
-plt.axhline(pi_star, color='gray', linestyle='--', label='$\pi^*$')
 plt.title("$\pi$")
-plt.legend()
 plt.grid(True, linestyle=':', alpha=0.7)
+
 
 plt.subplot(1,2,2)
 plt.plot(time, y_vals, marker='o', color='orange')
-plt.axhline(y_bar, color='gray', linestyle='--', label='$\\bar{y}$')
 plt.title("$y$")
-plt.legend()
 plt.grid(True, linestyle=':', alpha=0.7)
-
 plt.tight_layout()
+
+plt.savefig("as_ad/baseline_impulse.pdf")
 
 # 3. as ad diagram
 # 3a. number of periods to illustrate
-T = T_fig #
+T = T_fig 
 z_vals = z  
 s_vals = s  
 
@@ -83,7 +82,7 @@ for t in range(T+1): # find equilibirum
     pi_e = pi_t
 
 # 3c. curves
-y_grid = np.linspace(0, 20, 200)
+y_grid = np.linspace(0, 30, 200)
 
 # 3d. plot
 plt.figure(figsize=(8,6))
@@ -112,9 +111,10 @@ plt.axvline(x=y_bar, color='black', linestyle='-', label='LRAS') # plot lras
 
 plt.xlabel("$y$")
 plt.ylabel("$\\pi$")
-plt.xlim([0,20])
-plt.ylim([0,20])
+plt.xlim([0,30])
+plt.ylim([0,30])
 plt.grid(True,  linestyle=':', alpha=0.7)
 plt.legend(loc="upper right")
 plt.tight_layout()
-plt.show()
+
+plt.savefig("as_ad/baseline_diag.pdf")
