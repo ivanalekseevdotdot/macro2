@@ -2,8 +2,6 @@ import pandas as pd
 import matplotlib.pyplot as plt  
 from matplotlib.lines import Line2D
 import numpy as np
-import os
-desktop = os.path.join(os.path.expanduser("~"), "Desktop")
 
 # a. import
 df = pd.read_excel('/Users/ivanalekseev/Desktop/dk_taylor_data.xlsx', 
