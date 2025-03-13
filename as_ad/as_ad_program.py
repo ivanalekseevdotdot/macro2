@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 
 # 1. calibration
 # 1a. parameters
-alpha = 1.0      
+alpha = 3.0      
 gamma = 1.0      
 y_bar = 10.0      
 pi_star = 10.0    
@@ -23,7 +23,8 @@ y_vals  = np.zeros(T+1)
 pi_vals[0] = pi_star   
 y_vals[0]  = y_bar     
 
-# 1e. simulate
+# 2. impulse responses
+# 2a. simulate
 for t in range(1, T+1):
     
     numerator = ( pi_vals[t-1] 
@@ -40,7 +41,7 @@ time = np.arange(T+1)
 
 plt.figure(figsize=(10,5))
 
-# 1f. plot
+# 2b. plot
 plt.subplot(1,2,1)
 plt.plot(time, pi_vals, marker='o')
 plt.axhline(pi_star, color='gray', linestyle='--', label='$\pi^*$')
@@ -57,14 +58,13 @@ plt.grid(True, linestyle=':', alpha=0.7)
 
 plt.tight_layout()
 
-# 2. as ad diagram
-
-# 2a. number of periods to illustrait
+# 3. as ad diagram
+# 3a. number of periods to illustrate
 T = T_fig #
 z_vals = z  
 s_vals = s  
 
-# 3a. solve model
+# 3b. solve model
 pi_e = pi_star # expectations anchored at target
 
 y_eqs, pi_eqs = [], [] # array for solutions
@@ -82,10 +82,10 @@ for t in range(T+1): # find equilibirum
     pi_eqs.append(pi_t)
     pi_e = pi_t
 
-# 3b. curves
+# 3c. curves
 y_grid = np.linspace(0, 20, 200)
 
-# 3c. plot
+# 3d. plot
 plt.figure(figsize=(8,6))
 
 colors = ['orange','green','purple','brown']
