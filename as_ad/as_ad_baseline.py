@@ -108,6 +108,7 @@ for t in range(T+1):
     plt.plot(y_eqs[t], pi_eqs[t], 'ko')
 
 plt.axvline(x=y_bar, color='black', linestyle='-', label='LRAS') # plot lras
+plt.axhline(y=pi_star, color='gray', linestyle='--', label='$\pi^\star$') # plot target inf
 
 plt.xlabel("$y$")
 plt.ylabel("$\\pi$")
