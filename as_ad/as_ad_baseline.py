@@ -4,12 +4,12 @@ import matplotlib.ticker as ticker
 
 # 1. calibration
 # 1a. parameters
-alpha = 2.0      
+alpha = 3.0      
 gamma = 2.0      
 y_bar = 15.0      
 pi_star = 10.0    
 T = 20
-T_fig = 2           
+T_fig = 3           
 
 # 1b. shocks
 z = np.zeros(T+1)

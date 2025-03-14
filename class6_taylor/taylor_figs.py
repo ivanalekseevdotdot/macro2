@@ -31,7 +31,7 @@ taylor_baseline_h1=ax.plot(date, i_taylor_1, color='darkred', label=r'Taylor rul
 ax.set_xlabel('Date', fontsize=12)
 ax.legend()
 ax.grid(True, linestyle=':', alpha=0.7)
-plt.savefig("class6_taylor/a_baseline.pdf")
+plt.savefig("class6_taylor/a_baseline.pdf", bbox_inches='tight')
 
 # f. sensitivity to h new plot
 for line in taylor_baseline_h1:
@@ -44,7 +44,7 @@ for h in grid:
     lines = ax.plot(date, i_taylor_h, color='lightcoral', alpha=0.5)
     h_fans.extend(lines)
 taylor_baseline_h2 = ax.plot(date, i_taylor_1, color='darkred', label=r'Taylor rule $i$')
-plt.savefig("class6_taylor/b_change_h.pdf")
+plt.savefig("class6_taylor/b_change_h.pdf", bbox_inches='tight')
 
 # g. sensetivity to b new plot
 for line in h_fans:
@@ -56,7 +56,7 @@ for b in grid:
     lines = ax.plot(date, i_taylor_b, color='salmon', alpha=0.5)
     b_fans.extend(lines)
 ax.plot(date, i_taylor_1, color='darkred', label=r'Taylor rule $i$')
-plt.savefig("class6_taylor/c_change_b.pdf")
+plt.savefig("class6_taylor/c_change_b.pdf", bbox_inches='tight')
 
 # h. new rbar
 for line in taylor_baseline_h2:
@@ -80,4 +80,4 @@ new_r_bar = df['r_bar_new']
 i_taylor_new_r = taylor(h=0.5, b=0.5, pi_star = 2, r_bar = new_r_bar)
 ax.plot(date, i_taylor_new_r, color='orange', label=r'Taylor rule $i$ (new $\bar{r}$)')
 ax.legend()
-plt.savefig("class6_taylor/d_change_rbar.pdf")
+plt.savefig("class6_taylor/d_change_rbar.pdf", bbox_inches='tight')
