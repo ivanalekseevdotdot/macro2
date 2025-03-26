@@ -14,9 +14,10 @@ b = 0.02
 w_grid = np.linspace(0.0001, 100, 10000)
 
 def labor_demand(w):
-    inner2 = (sigma-1)/sigma*(1-alpha)*(Y/n)**(1/sigma)*B**(1/(1-sigma))
-    inner = (inner2/w)**(1/sigma+1/(1-alpha)-1)*B**(-1)
-    return inner**(1/(1-alpha))
+    inner_exponent = 1 / (1/sigma + 1/(1 - alpha) - 1)
+    numerator = ((sigma - 1) / sigma) * (1 - alpha) * (Y/n)**(1/sigma) * B**(1/(1 - sigma))
+    inner = (numerator / w)**(inner_exponent) * B**(-1)
+    return inner**(1/(1 - alpha))
 
 def wage(P_e):
     inner3 = sigma/(1+alpha*(sigma-1))
@@ -31,6 +32,7 @@ fig, ax = plt.subplots(figsize=(5.5,4))
 ax.plot(demand_curve, w_grid, color='orange', label=r'$L_i$')
 ax.plot([0, max(demand_curve)], [w_prime, w_prime], linestyle='-', color='blue', label=r'$w_i^\prime$')
 ax.plot(labor_demand(w_prime), w_prime, 'o', color='grey', markersize=5, label='Eq.')
+ax.grid(True, which='major', linestyle=':', color='gray', alpha=0.7) #grid
 plt.xlim(0, 10)
 plt.ylim(0, 1)
 plt.xlabel(r'$L_i$', fontsize=12)
@@ -45,6 +47,7 @@ ax.plot(demand_curve, w_grid, color='orange', label=r'$L_i$')
 ax.plot([0, max(demand_curve)], [w_prime, w_prime], linestyle='-', color='blue', label=r'$w_i^\prime$')
 ax.plot([0, max(demand_curve)], [w_actual, w_actual], linestyle='-', color='maroon', label=r'$w_i$')
 ax.plot(labor_demand(w_actual), w_actual, 'o', color='grey', markersize=5, label='Eq.')
+ax.grid(True, which='major', linestyle=':', color='gray', alpha=0.7) #grid
 plt.xlim(0, 10)
 plt.ylim(0, 1)
 plt.xlabel(r'$L_i$', fontsize=12)
