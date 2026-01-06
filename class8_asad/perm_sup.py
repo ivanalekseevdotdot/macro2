@@ -33,7 +33,7 @@ def solve_equilibrium(pi_e_current, s, y_bar, pi_star):
     pi = pi_star - (1/alpha)*(y - y_bar)
     return y, pi
 
-# short-run as function test
+# short-run as function test2
 # as is given by:
 #    as(y) = πₑ^(prev) + γ*(y - y_bar) + s
 # for t=0 we take πₑ^(prev) = π★.
