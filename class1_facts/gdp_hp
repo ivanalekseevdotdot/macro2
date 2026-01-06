@@ -1,0 +1,35 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+from statsmodels.tsa.filters.hp_filter import hpfilter
+from pathlib import Path
+
+here = Path(__file__).resolve().parent     
+path = here / "gdp_q.xlsx"
+sheet = "NKN1"
+
+df = pd.read_excel(path, sheet_name=sheet)
+
+df = df.rename(columns={
+    df.columns[2]: "q",      
+    df.columns[3]: "y"       
+})
+
+df = df[["q", "y"]].dropna()
+
+df["q"] = df["q"].astype(str).str.strip()
+df["date"] = pd.PeriodIndex(df["q"].str.replace("K", "Q", regex=False), freq="Q").to_timestamp("Q")
+df = df.set_index("date")
+y = np.log(pd.to_numeric(df["y"], errors="coerce").dropna())
+
+cycle, trend = hpfilter(y, lamb=1600)
+
+plt.figure(figsize=(6,4))
+plt.grid(True, linestyle=':', alpha=0.7)
+plt.plot(y.index, y.values)
+plt.plot(trend.index, trend.values, label=r"HP ($\lambda=1600$)")
+plt.xlim(pd.Period("1991Q1").to_timestamp("Q"),
+         pd.Period("2025Q3").to_timestamp("Q"))
+plt.ylabel("Log GDP")
+plt.legend()
+plt.savefig("class1_facts/gdp.pdf", bbox_inches='tight')

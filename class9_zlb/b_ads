@@ -1,0 +1,69 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# 1. Calibration
+gamma = 2.0
+y_bar = 5.0
+pi_star = 4.0
+s = np.zeros(4)
+s[1] = 0.5  # Positive supply shock in period 1
+
+# 2. Define AD and AS curves
+def AD_curve(y, alpha):
+    return pi_star - (1/alpha)*(y - y_bar)
+
+def AS_curve(y, pi_e, s_val):
+    return pi_e + gamma*(y - y_bar) + s_val
+
+# 3. Parameter values for alpha
+alphas = [0.5, 0.9, 1.5]  # Three different values for alpha
+
+# 4. Create the plot
+plt.figure(figsize=(8, 6))
+
+# Define y grid
+y_grid = np.linspace(0, 10, 200)
+
+# Add vertical and horizontal lines
+plt.axvline(x=y_bar, color='gray', linestyle='--', label=r"$y_{bar}$")
+plt.axhline(y=pi_star, color='gray', linestyle=':', label=r"$\pi^*$")
+
+# Plot AD curves (same for all periods)
+colors = ['gray', 'navy', 'orange']
+for i, alpha in enumerate(alphas):
+    ad_curve = [AD_curve(y, alpha) for y in y_grid]
+    plt.plot(y_grid, ad_curve, label=f"$AD_1 (\\alpha={alpha})$", color=colors[i])
+
+# Plot AS curves for each period
+pi_e = pi_star  # Expected inflation
+# AS curve before the shock (period 0)
+as_curve_0 = [AS_curve(y, pi_e, s[0]) for y in y_grid]
+plt.plot(y_grid, as_curve_0, label=r"$AS_0$", color='green', linestyle='-')
+
+# AS curve after the shock (period 1)
+as_curve_1 = [AS_curve(y, pi_e, s[1]) for y in y_grid]
+plt.plot(y_grid, as_curve_1, label=r"$AS_1$", color='black', linestyle='-')
+
+# Find and plot intersections (Closed-form solution)
+for i, alpha in enumerate(alphas):
+    # Intersection with AS0
+    y_intersect_0 = (alpha * (pi_e - pi_star - s[0] + gamma * y_bar) + y_bar) / (alpha * gamma + 1)
+    pi_intersect_0 = AS_curve(y_intersect_0, pi_e, s[0])
+    plt.plot(y_intersect_0, pi_intersect_0, marker='o', color='black', markersize=6)
+
+    # Intersection with AS1
+    y_intersect_1 = (alpha * (pi_e - pi_star - s[1] + gamma * y_bar) + y_bar) / (alpha * gamma + 1)
+    pi_intersect_1 = AS_curve(y_intersect_1, pi_e, s[1])
+    plt.plot(y_intersect_1, pi_intersect_1, marker='o', color='black', markersize=6)
+
+# 5. Customize the plot
+plt.xlabel("y")
+plt.ylabel("$\\pi$")
+plt.xlim(4.5, 5.5)
+plt.ylim(3.5, 4.5)
+plt.grid(True)
+plt.legend()
+plt.tight_layout()
+
+# 6. Save the plot
+plt.savefig("class9_zlb/as_ad_alphas_supply_shock.pdf")
