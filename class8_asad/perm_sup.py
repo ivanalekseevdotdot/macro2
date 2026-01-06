@@ -23,7 +23,7 @@ s2 = s1       # t = 2: shock persists
 def AD_func(y, y_bar, pi_star, z=0.0):
     return pi_star - (1/alpha)*(y - y_bar) + z/alpha
 
-# equilibrium solver
+# equilibrium solver test
 #   y = y_bar + (π★ - π_e - s) / (γ + 1/α)
 #   π = π★ - (1/α)(y - y_bar)
 def solve_equilibrium(pi_e_current, s, y_bar, pi_star):
